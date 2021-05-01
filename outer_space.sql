@@ -2,27 +2,29 @@
 -- psql < outer_space.sql
 
 DROP DATABASE IF EXISTS outer_space;
-
 CREATE DATABASE outer_space;
-
 \c outer_space
 
-CREATE TABLE planets
-(
+CREATE TABLE galaxy (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+); 
+
+CREATE TABLE planets (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
-  orbital_period_in_years FLOAT NOT NULL,
-  orbits_around TEXT NOT NULL,
-  galaxy TEXT NOT NULL,
-  moons TEXT[]
-);
+  galaxy_id INTEGER REFERENCES galaxy ON DELETE CASCADE,
+  orbits_around_sun BOOLEAN NOT NULL
+); 
 
-INSERT INTO planets
-  (name, orbital_period_in_years, orbits_around, galaxy, moons)
+INSERT INTO galaxy (name)
 VALUES
-  ('Earth', 1.00, 'The Sun', 'Milky Way', '{"The Moon"}'),
-  ('Mars', 1.88, 'The Sun', 'Milky Way', '{"Phobos", "Deimos"}'),
-  ('Venus', 0.62, 'The Sun', 'Milky Way', '{}'),
-  ('Neptune', 164.8, 'The Sun', 'Milky Way', '{"Naiad", "Thalassa", "Despina", "Galatea", "Larissa", "S/2004 N 1", "Proteus", "Triton", "Nereid", "Halimede", "Sao", "Laomedeia", "Psamathe", "Neso"}'),
-  ('Proxima Centauri b', 0.03, 'Proxima Centauri', 'Milky Way', '{}'),
-  ('Gliese 876 b', 0.23, 'Gliese 876', 'Milky Way', '{}');
+('Milky Way'),
+('Andromeda');
+
+INSERT INTO planets (name, galaxy_id, orbits_around_sun) 
+VALUES 
+('Earth', 1, true),
+('Venus', 1, true),
+('Mars', 1, true),
+('Proxima Centauri b', 1, false);
