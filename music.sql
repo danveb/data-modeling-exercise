@@ -42,7 +42,7 @@ INSERT INTO song (title, release_date, album_id, producers_id)
 VALUES 
 ('MMMBop', '1997-04-15', 1, 1),
 ('Bohemian Rapsody', '1975-10-31', 2, 2), 
-('One Sweet Day', '1995-11-14', 3, 3);
+('One Sweet Day', '1995-11-14', 3, 3); 
 
 -- CREATE TABLE songs
 -- (
